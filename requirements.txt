@@ -1,9 +1,8 @@
-streamlit
-opencv-python
-numpy
+ultralytics
 pandas
-requests
-scikit-image
 matplotlib
-imutils
-ultralytics   
+numpy
+opencv-python
+streamlit
+twilio
+Pillow
