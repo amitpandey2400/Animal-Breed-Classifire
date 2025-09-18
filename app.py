@@ -141,10 +141,10 @@ if uploaded_files:
 
         st.subheader("Combined Results")
         st.write(f"Predicted Breed: {breeds[0]}")
-        st.write(f"Average Confidence: {avg_confidence:.2f}")
-        st.write(f"Average Body Length: {avg_length:.2f} cm")
-        st.write(f"Average Height at Withers: {avg_height:.2f} cm")
-        st.write(f"Average Chest Width: {avg_chest_width:.2f} cm")
+        st.write(f"Confidence: {avg_confidence:.2f}")
+        st.write(f"Body Length: {avg_length:.2f} cm")
+        st.write(f"Height at Withers: {avg_height:.2f} cm")
+        st.write(f"Chest Width: {avg_chest_width:.2f} cm")
 
         if st.sidebar.checkbox("Save combined record?"):
             record = {
@@ -170,3 +170,4 @@ if uploaded_files:
 
     else:
         st.warning("The uploaded images do not belong to the same breed. Please upload multiple images of the same breed for combined analysis.")
+
