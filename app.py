@@ -39,6 +39,15 @@ data = {
         "Jersey",
         "Sahiwal"
     ],
+    "Lifespan (Years)": [
+        "6 to 8",
+        "7 to 12",
+        "10 to 12"
+    ],"Maturity Age (Years)": [
+        "2 to 2.5",    # Approximate age at sexual maturity
+        "1.7 to 2",    # Approximate age at sexual maturity
+        "2 to 2.5"     # Approximate age at sexual maturity
+    ],
     "Milk per Day (Liters)": [
         "15-35",
         "15-20",
@@ -55,6 +64,7 @@ data = {
         "62"
     ]
 }
+
 
 df = pd.DataFrame(data)
 st.subheader("Cattle Breed Milk Production Details")
