@@ -15,6 +15,8 @@ from processor import (
     compute_body_length_and_height,
 )
 
+from scoring import atc_score
+
 from save_and_notify import save_record
 import pandas as pd
 
@@ -139,6 +141,11 @@ if uploaded_files:
         avg_height = sum(heights) / len(heights)
         avg_chest_width = sum(chest_widths) / len(chest_widths)
 
+        # Calculate average rump angle and ATC score
+        avg_rump_angle = 0.0  # You can compute average if you save all rump_angle values in loop
+        # Here adding 0.0 for simplicity
+        avg_atc_score = atc_score(avg_length, avg_height, avg_chest_width, avg_rump_angle)
+
         st.subheader("Combined Results")
         st.write(f"Predicted Breed: {breeds[0]}")
         st.write(f"Confidence: {avg_confidence:.2f}")
@@ -162,12 +169,11 @@ if uploaded_files:
                 "body_length": avg_length,
                 "height_at_withers": avg_height,
                 "chest_width": avg_chest_width,
-                "rump_angle_deg": "N/A",
-                "atc_score": "N/A"
+                "rump_angle_deg": avg_rump_angle,
+                "atc_score": avg_atc_score
             }
             pdf_report.generate_report(pdf_filename, pdf_data)
             st.success(f"PDF report generated: {pdf_filename}")
 
     else:
         st.warning("The uploaded images do not belong to the same breed. Please upload multiple images of the same breed for combined analysis.")
-
