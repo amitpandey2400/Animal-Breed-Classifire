@@ -34,31 +34,31 @@ st.set_page_config(
 
 # Existing milk production details table intact and unchanged
 data = {
-    "Breed": [
-        "Holstein Friesian",
-        "Jersey",
-        "Sahiwal"
+    "Breed(नस्ल)": [
+        "Holstein Friesian(होल्स्टीन फ्राइज़ियन)",
+        "Jersey(जर्सी)",
+        "Sahiwal(साहीवाल)"
     ],
-    "Lifespan (Years)": [
+    "Lifespan Years(जीवनकाल (वर्ष))": [
         "6 to 8",
         "7 to 12",
         "10 to 12"
-    ],"Maturity Age (Years)": [
+    ],"Maturity Age (परिपक्वता आयु)(Years(वर्ष))": [
         "2 to 2.5",    # Approximate age at sexual maturity
         "1.7 to 2",    # Approximate age at sexual maturity
         "2 to 2.5"     # Approximate age at sexual maturity
     ],
-    "Milk per Day (Liters)": [
+    "Milk per Day Liters (दूध प्रति दिन (लीटर))": [
         "15-35",
         "15-20",
         "8-20"
     ],
-    "Fat Content (%)": [
+    "Fat Content(फैट की मात्रा) (%)": [
         "3.5-4",
         "4.5-5",
         "4-5"
     ],
-    "Average Price per Liter (₹)": [
+    "Average Price per Liter(औसत मूल्य प्रति लीटर) (₹)": [
         "60",
         "65",
         "62"
@@ -67,22 +67,22 @@ data = {
 
 
 df = pd.DataFrame(data)
-st.subheader("Cattle Breed Milk Production Details")
+st.subheader("Cattle Breed Milk Production Details(मवेशी नस्ल के दूध उत्पादन का विवरण)")
 st.table(df)
 
 cattle_breeds = [
-    "Sorry it's Currently not in our Dataset",
-    "Holstein Friesian 15-35 Liters Milk/Day Fat 3.5-4% Avg Price INR60 per Liter",
-    "Jersey 15-20 Liters Milk/Day Fat 4.5-5% Avg Price INR65 per Liter",
+    "Sorry it's Currently not in our Dataset(क्षमा करें, यह वर्तमान में हमारे डेटासेट में नहीं है)",
+    "Holstein Friesian(होल्स्टीन फ्राइज़ियन) 15-35 Liters Milk per Day(15-35- लीटर दूध प्रति दिन) Fat (फैट) 3.5-4% Avg Price INR60 per Liter(औसत मूल्य 60 रुपये प्रति लीटर)",
+    "Jersey(जर्सी) 15-20 Liters Milk per Day(15-25- लीटर दूध प्रति दिन) Fat(फैट) 4.5-5%  INR 65 per Liter (औसत मूल्य 65 रुपये प्रति लीटर)",
     "Red Dane (Not covered)",
-    "Sahiwal 8-20 Liters Milk/Day Fat 4-5% Avg Price INR62 per Liter"
+    "Sahiwal (साहीवाल)8-20 Liters Milk per Day (8-20- लीटर दूध प्रति दिन ) Fat(फैट) 4-5% INR 62 per Liter औसत मूल्य 62 रुपये प्रति लीटर)"
 ]
 
-st.title("Animal Type Classification System")
+st.title("Animal Type Classification System (पशु प्रकार वर्गीकरण प्रणाली)")
 
 # New feature: Multiple images upload for combined breed detection
 uploaded_files = st.file_uploader(
-    "Upload multiple images of Cattle or Buffalo from different angles (jpg, png, jpeg)",
+    "Upload multiple images of Cattle or Buffalo from different angles (jpg, png, jpeg)(विभिन्न कोणों से मवेशी की कई छवियां अपलोड करें) ",
     type=["jpg", "png", "jpeg"],
     accept_multiple_files=True,
 )
@@ -97,7 +97,7 @@ if uploaded_files:
 
     for uploaded_file in uploaded_files:
         image = Image.open(uploaded_file)
-        st.image(image, caption=f"Uploaded Image: {uploaded_file.name}", use_column_width=True)
+        st.image(image, caption=f"Uploaded Image(अपलोड फ़ोटो): {uploaded_file.name}", use_column_width=True)
         image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
         temp_path = f"temp_{sanitize_filename(uploaded_file.name)}.jpg"
         write_success = cv2.imwrite(temp_path, image_cv)
@@ -156,22 +156,22 @@ if uploaded_files:
         # Here adding 0.0 for simplicity
         avg_atc_score = atc_score(avg_length, avg_height, avg_chest_width, avg_rump_angle)
 
-        st.subheader("Combined Results")
-        st.write(f"Predicted Breed: {breeds[0]}")
-        st.write(f"Confidence: {avg_confidence:.2f}")
-        st.write(f"Body Length: {avg_length:.2f} cm")
-        st.write(f"Height at Withers: {avg_height:.2f} cm")
-        st.write(f"Chest Width: {avg_chest_width:.2f} cm")
+        st.subheader("Combined Results(संयुक्त परिणाम)")
+        st.write(f"Predicted Breed(अनुमानित नस्ल): {breeds[0]}")
+        st.write(f"Confidence(आत्मविश्वास): {avg_confidence:.2f}")
+        st.write(f"Body Length(शरीर की लंबाई): {avg_length:.2f} cm")
+        st.write(f"Height at Withers(ऊर्ध्वाधर माप): {avg_height:.2f} cm")
+        st.write(f"Chest Width(छाती की चौड़ाई): {avg_chest_width:.2f} cm")
 
-        if st.sidebar.checkbox("Save combined record?"):
+        if st.sidebar.checkbox("Save combined record?(संयुक्त रिकॉर्ड सहेजें?)"):
             record = {
-                "breed": breeds[0],
-                "confidence": avg_confidence,
-                "timestamp": datetime.now().isoformat(),
+                "breed((नस्ल))": breeds[0],
+                "confidence(आत्मविश्वास)": avg_confidence,
+                "timestamp( समय मोहर)": datetime.now().isoformat(),
             }
             save_record(record, outfolder="records")
 
-        if st.sidebar.button("Generate Combined PDF Report"):
+        if st.sidebar.button("Generate Combined PDF Report(संयुक्त PDF रिपोर्ट तैयार करें)"):
             pdf_filename = f"{sanitize_filename(breeds[0])}_{datetime.now().strftime('%Y%m%d_%H%M%S')}_combined.pdf"
             pdf_data = {
                 "breed": breeds[0],
@@ -186,4 +186,4 @@ if uploaded_files:
             st.success(f"PDF report generated: {pdf_filename}")
 
     else:
-        st.warning("The uploaded images do not belong to the same breed. Please upload multiple images of the same breed for combined analysis.")
+        st.warning("The uploaded images do not belong to the same breed. Please upload multiple images of the same breed for combined analysis.(अपलोड की गई तस्वीरें एक ही नस्ल की नहीं हैं। कृपया संयुक्त विश्लेषण के लिए एक ही नस्ल की कई तस्वीरें अपलोड करें।)")
